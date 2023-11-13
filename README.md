@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Frontend React Authentication Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application has the following functionalities:
 
-## Available Scripts
+## Registration
 
-In the project directory, you can run:
+The user has to type a username and password and confirm it. The sign up button is inactive if nothing is typed. 
 
-### `npm start`
+<img width="644" alt="Снимок экрана 2023-11-13 в 14 04 47" src="https://github.com/lavrentyevn/authfrontend/assets/111048277/1cbe2006-4dbf-401b-a6e6-0d24ce6bd668">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The registration form also checks what kind of text the user is typing, as it may contain forbidden symbols.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<img width="666" alt="Снимок экрана 2023-11-13 в 14 12 25" src="https://github.com/lavrentyevn/authfrontend/assets/111048277/1b47ba72-04a8-4035-836d-573c6094aaa9">
 
-### `npm test`
+## Authentication
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The user has to type a username and password. React application sends an axios request to a backend api and proceeds to protected components if it gets a success status code.
 
-### `npm run build`
+<img width="650" alt="Снимок экрана 2023-11-13 в 14 04 40" src="https://github.com/lavrentyevn/authfrontend/assets/111048277/3984da24-402b-4926-85e9-1ca269f92186">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The user can tick a "Trust this computer" checkbox, which persists user information. It means that if this user refreshes this page or opens a new tab, he does not have to authenticate again (as long as he has a refresh token, which can be obtained from a backend api when he logs in). This checkbox boolean is stored in localStorage.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img width="548" alt="Снимок экрана 2023-11-13 в 14 18 11" src="https://github.com/lavrentyevn/authfrontend/assets/111048277/0035cf06-da93-4ed1-8978-e2562eaab054">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Authentication information is stored is a useContext hook. 
 
-### `npm run eject`
+## Protected Routes
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Protected routes are wrapped in a **PersistLogin** and **RequireAuth** components.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-  PersistLogin <br />
+If the user decides to "Trust this computer", then he does not have to log in again as long as he has a refresh token. The refresh token can be used to obtain a new access token.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-  RequireAuth <br />
+This component checks if the user is authenticated.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img width="360" alt="Снимок экрана 2023-11-13 в 14 30 13" src="https://github.com/lavrentyevn/authfrontend/assets/111048277/ec105f3d-f82a-4f52-970a-ef463b9e156c">
